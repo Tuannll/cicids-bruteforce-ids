@@ -1,0 +1,52 @@
+# Paths are relative to this repository, not the calling shell.
+experiment_id: tuesday_temporal_v1
+seed: 42
+input:
+  csv: data/raw/Tuesday-WorkingHours.pcap_ISCX.csv
+  source_url: https://www.unb.ca/cic/datasets/ids-2017.html
+  source_note: >-
+    GeneratedLabelledFlows/Tuesday-WorkingHours.pcap_ISCX.csv
+    from CICIDS2017 dataset (UNB).
+    SHA256: ae9c88e10c41a8eb1ff454ae98bc513454925097d0b0b57180f94e79de445815
+  encoding: utf-8-sig
+  chunksize: 50000
+  timestamp_formats: ["%d/%m/%Y %H:%M:%S", "%d/%m/%Y %H:%M"]
+  expected_date: "2017-07-04"
+  duration_unit: us
+  timestamp_precision_seconds: 60
+  clock_basis: >-
+    CICFlowMeter export with minute-level precision.
+    Raw hours 1-5 mapped to 13-17 based on EDA timeline audit.
+    No raw PCAP clock available for independent verification.
+  clock_reviewed: true
+  synthetic: false
+features:
+  # Explicit allowlist in schema.py. Both ports and Protocol excluded by design.
+  min_present: 20
+split:
+  # Audited cutoffs from EDA timeline (docs/quy_trinh_thu_thap_tien_xu_ly_CICIDS2017.md)
+  train_end: "2017-07-04 10:00:00"
+  validation_end: "2017-07-04 14:30:00"
+  embargo_seconds: 120
+  min_per_binary_class: 30
+  cutoffs_reviewed: true
+  cutoff_reason: >-
+    EDA timeline audit confirmed FTP-Patator 09:20-10:16 and SSH-Patator 14:01-14:55.
+    A=10:00:00 places early FTP in Train (~68%) and tail FTP in Validation (~32%),
+    providing attack diversity to Validation. B=14:30:00 places early SSH in Validation (~34%)
+    and main SSH in Test (~66%). Test evaluates SSH-Patator only (zero-shot transfer evaluation).
+  # Preserve original temporal population; report feature overlap separately.
+  duplicate_policy: exact_record_keep_earliest
+training:
+  models: [decision_tree, random_forest, xgboost]
+  n_jobs: 2
+  thresholds: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95]
+  selection_metric: f1_attack
+  decision_tree: {max_depth: 8, min_samples_leaf: 10}
+  random_forest: {n_estimators: 150, max_depth: 16, min_samples_leaf: 5, max_features: sqrt}
+  xgboost: {n_estimators: 200, max_depth: 4, learning_rate: 0.08, min_child_weight: 5, subsample: 0.8, colsample_bytree: 0.8, reg_lambda: 1.0}
+explain:
+  max_rows: 500
+paths:
+  processed: data/processed/tuesday_temporal_v1
+  run: artifacts/tuesday_temporal_v1

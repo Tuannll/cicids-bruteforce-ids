@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Thống kê phân bổ dữ liệu các tập Train, Validation và Test theo chiến lược Temporal Split v1.}
+\label{tab:dataset_splits}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Tập dữ liệu} & \textbf{Tổng số flow} & \textbf{BENIGN} & \textbf{Tấn công} & \textbf{FTP-Patator} & \textbf{SSH-Patator} & \textbf{Tỷ lệ Attack (\%)} \\
+\midrule
+Train & 90,273 & 85,139 & 5,134 & 5,134 & 0 & 5.69\% \\
+Validation & 203,826 & 199,522 & 4,304 & 2,418 & 1,886 & 2.11\% \\
+Test & 144,157 & 140,425 & 3,732 & 0 & 3,732 & 2.59\% \\
+\midrule
+Purge/Embargo & 7,632 & 6,967 & 665 & 386 & 279 & 8.71\% \\
+\textbf{Tổng số hợp lệ} & \textbf{445,888} & \textbf{432,053} & \textbf{13,835} & \textbf{7,938} & \textbf{5,897} & \textbf{3.10\%} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

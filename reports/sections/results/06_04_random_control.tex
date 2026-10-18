@@ -1,0 +1,29 @@
+% ==============================================================================
+% reports/sections/results/06_04_random_control.tex
+% ==============================================================================
+
+\section{Kết quả thực nghiệm đối chứng trên phân tách ngẫu nhiên}
+
+Khác biệt rõ rệt với kết quả hiệu năng rất thấp trên phân tách theo thời gian, kết quả của các mô hình trên tập kiểm thử phân tách ngẫu nhiên (phân tách ngẫu nhiên có cổng) đạt điểm số rất cao (xem Phần B của Bảng \ref{tab:test_comparison}):
+\begin{itemize}
+    \item \textbf{Cây Quyết Định (Decision Tree)}: Đạt $\FOne = \textbf{\DTRandomFOne}$, $\Precision = \DTRandomPrecision$, $\Recall = \DTRandomRecall$, $\AP = \DTRandomAP$, $\ROCAUC = \DTRandomROCAUC$. Tỷ lệ phát hiện đạt \DTRandomFTPRecall\ đối với FTP và \DTRandomSSHRecall\ đối với SSH.
+    \item \textbf{Rừng Ngẫu Nhiên (Random Forest)}: Đạt $\FOne = \textbf{\RFRandomFOne}$, $\Precision = \RFRandomPrecision$, $\Recall = \RFRandomRecall$, $\AP = \RFRandomAP$, $\ROCAUC = \RFRandomROCAUC$. Tỷ lệ phát hiện đạt \RFRandomFTPRecall\ đối với FTP và \RFRandomSSHRecall\ đối với SSH.
+    \item \textbf{XGBoost}:
+    Đạt $\FOne = \textbf{\XGBRandomFOne}$, $\Precision = \XGBRandomPrecision$, $\Recall = \XGBRandomRecall$, $\AP = \XGBRandomAP$, $\ROCAUC = \XGBRandomROCAUC$. Tỷ lệ phát hiện đạt \XGBRandomFTPRecall\ đối với FTP và \XGBRandomSSHRecall\ đối với SSH.
+\end{itemize}
+
+\subsection{Đo lường định lượng độ lệch đánh giá}
+Bảng \ref{tab:split_diff} trình bày sự chênh lệch trực tiếp giữa hai chiến lược phân tách dữ liệu trên tập kiểm định.
+
+\input{tables/generated/tab_split_diff.tex}
+
+Khoảng cách chênh lệch hiệu năng ($\Delta\FOne$) giữa Random Split và Time-based Split trên tập Validation dao động từ \textbf{0.2631 đến 0.2848}. Trên tập Test chính thức, khoảng cách này thể hiện rất rõ: đối với Random Forest, điểm F1 tăng từ \textbf{\RFTestFOne} (trên Time Split) lên \textbf{\RFRandomFOne} (trên Random Split), như được minh họa đối chiếu trên Hình \ref{fig:data_leakage_benchmark}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{experiments/figures/06_data_leakage_benchmark.png}
+\caption{Đối chiếu hiệu năng giữa phân tách ngẫu nhiên và phân tách theo thời gian, trực quan hóa mức độ chênh lệch hiệu năng do tương quan nội bộ chiến dịch.}
+\label{fig:data_leakage_benchmark}
+\end{figure}
+
+Hiện tượng này phù hợp với các phân tích của Arp và cộng sự \cite{arp2022dos} cũng như Pendlebury và cộng sự \cite{pendlebury2019tesseract}: Việc phân tách ngẫu nhiên trên dữ liệu chuỗi thời gian mạng có thể tạo ra độ lệch đánh giá quá lạc quan vì các flow có tương quan mạnh từ cùng một chiến dịch tấn công (tương quan nội bộ chiến dịch) được phân bổ vào cả tập huấn luyện và kiểm thử. Do đó, điểm số cao trong thiết lập ngẫu nhiên phản ánh một đánh giá mang tính chất nội suy trên các mẫu có độ trùng lặp phân phối cao, hơn là bằng chứng cho năng lực khái quát hóa sang các biến thể hoặc thời điểm mới.

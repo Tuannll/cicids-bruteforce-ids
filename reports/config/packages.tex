@@ -1,0 +1,67 @@
+% ==============================================================================
+% reports/config/packages.tex
+% Khai báo các gói lệnh (packages) cần thiết cho báo cáo tốt nghiệp / nghiên cứu
+% ==============================================================================
+
+% Thiết lập font và ngôn ngữ
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{vietnamese}
+\setotherlanguage{english}
+
+% Toán học
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+% Bảng biểu chuyên nghiệp
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% Đồ họa và hình ảnh
+\usepackage{graphicx}
+\graphicspath{{./}{../}}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% Căn lề và khoảng cách
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Trích dẫn và liên kết
+\usepackage[autostyle=true]{csquotes}
+\DeclareQuoteAlias{english}{vietnamese}
+\usepackage[backend=biber,style=ieee,sorting=none,language=english,autolang=none]{biblatex}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage{adjustbox}
+
+% Mã nguồn và thuật toán
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    commentstyle=\color{gray},
+    keywordstyle=\color{blue!70!black}\bfseries,
+    stringstyle=\color{teal!70!black},
+    frame=single,
+    rulecolor=\color{black!20},
+    numbers=none
+}
+
+% Ký hiệu và macro mở rộng
+\usepackage{microtype}
+\usepackage{xspace}

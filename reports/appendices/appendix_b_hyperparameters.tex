@@ -1,0 +1,38 @@
+% ==============================================================================
+% reports/appendices/appendix_b_hyperparameters.tex
+% PHỤ LỤC B: KHÔNG GIAN SIÊU THAM SỐ VÀ CẤU HÌNH TỐI ƯU
+% ==============================================================================
+
+\chapter{Không Gian Siêu Tham Số và Cấu Hình Tối Ưu}
+\label{app:hyperparameters}
+
+Phụ lục này cung cấp chi tiết toàn bộ các cấu hình siêu tham số tối ưu của 12 tổ hợp thực nghiệm được lựa chọn từ tệp lưu vết cấu hình đóng băng \texttt{frozen.json} và \texttt{validation\_winners.csv}:
+
+\begin{table}[htbp]
+\centering
+\caption{Chi tiết tham số tối ưu của 12 mô hình được lựa chọn trên tập Validation.}
+\label{tab:app_best_params}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{llll>{\raggedright\arraybackslash}p{7.5cm}}
+\toprule
+\textbf{Mã kịch bản} & \textbf{Mô hình} & \textbf{Phân tách} & \textbf{Cổng} & \textbf{Tham số tối ưu được khóa} \\
+\midrule
+TN-01 & Decision Tree & Thời gian & Có cổng & \texttt{criterion='gini'}, \texttt{max\_depth=6}, \texttt{min\_samples\_leaf=5} \\
+TN-02 & Random Forest & Thời gian & Có cổng & \texttt{n\_estimators=100}, \texttt{max\_depth=16}, \texttt{min\_samples\_leaf=5} \\
+TN-03 & XGBoost & Thời gian & Có cổng & \texttt{n\_estimators=200}, \texttt{max\_depth=4}, \texttt{learning\_rate=0.08} \\
+\midrule
+TN-04 & Decision Tree & Thời gian & Không cổng & \texttt{criterion='gini'}, \texttt{max\_depth=8}, \texttt{min\_samples\_leaf=5} \\
+TN-05 & Random Forest & Thời gian & Không cổng & \texttt{n\_estimators=100}, \texttt{max\_depth=10}, \texttt{min\_samples\_leaf=5} \\
+TN-06 & XGBoost & Thời gian & Không cổng & \texttt{n\_estimators=200}, \texttt{max\_depth=4}, \texttt{learning\_rate=0.08} \\
+\midrule
+TN-07 & Decision Tree & Ngẫu nhiên & Có cổng & \texttt{criterion='gini'}, \texttt{max\_depth=12}, \texttt{min\_samples\_leaf=5} \\
+TN-08 & Random Forest & Ngẫu nhiên & Có cổng & \texttt{n\_estimators=100}, \texttt{max\_depth=None}, \texttt{min\_samples\_leaf=5} \\
+TN-09 & XGBoost & Ngẫu nhiên & Có cổng & \texttt{n\_estimators=200}, \texttt{max\_depth=6}, \texttt{learning\_rate=0.08} \\
+\midrule
+TN-10 & Decision Tree & Ngẫu nhiên & Không cổng & \texttt{criterion='gini'}, \texttt{max\_depth=None}, \texttt{min\_samples\_leaf=5} \\
+TN-11 & Random Forest & Ngẫu nhiên & Không cổng & \texttt{n\_estimators=150}, \texttt{max\_depth=None}, \texttt{min\_samples\_leaf=5} \\
+TN-12 & XGBoost & Ngẫu nhiên & Không cổng & \texttt{n\_estimators=200}, \texttt{max\_depth=6}, \texttt{learning\_rate=0.08} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

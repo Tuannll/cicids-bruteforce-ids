@@ -84,7 +84,7 @@ The repository includes a self-contained synthetic fixture generator, enabling a
 ### 1. Installation
 
 ```bash
-git clone https://github.com/Duc-AnhTp/cicids-bruteforce-ids.git
+git clone https://github.com/Tuannll/cicids-bruteforce-ids.git
 cd cicids-bruteforce-ids
 
 python -m venv .venv

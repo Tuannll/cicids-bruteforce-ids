@@ -91,7 +91,7 @@ Repo đi kèm bộ sinh dữ liệu giả lập (Synthetic Data Generator) giúp
 
 ```bash
 # Clone repository
-git clone https://github.com/Duc-AnhTp/cicids-bruteforce-ids.git
+git clone https://github.com/Tuannll/cicids-bruteforce-ids.git
 cd cicids-bruteforce-ids
 
 # Khởi tạo môi trường ảo Python 3.11 hoặc 3.12

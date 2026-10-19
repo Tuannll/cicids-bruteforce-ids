@@ -1,17 +1,17 @@
 <div align="center">
 
-# 🛡️ CICIDS2017 Brute Force Detection: Temporal Generalization & Data Leakage Benchmark
+# 🛡️ CICIDS2017 Brute Force Detection
 
 **Đánh giá thực nghiệm khả năng tổng quát hóa theo thời gian và vạch trần độ lệch lạc quan (Data Leakage) của mô hình học máy trong phát hiện tấn công mạng.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
-[![Python: 3.11 | 3.12](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6%2B-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-3.0.5-006699?style=flat-square)](https://xgboost.readthedocs.io/)
-[![SHAP](https://img.shields.io/badge/XAI-SHAP%200.48-brightgreen?style=flat-square)](https://shap.readthedocs.io/)
-[![CI Status](https://img.shields.io/badge/CI-Passing-success?style=flat-square&logo=githubactions&logoColor=white)](.github/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python: 3.11 | 3.12](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6%2B-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-3.0.5-006699?logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io/)
+[![SHAP](https://img.shields.io/badge/XAI-SHAP%200.48-brightgreen)](https://shap.readthedocs.io/)
+[![CI Status](https://img.shields.io/badge/CI-Passing-success?logo=githubactions&logoColor=white)](https://github.com/Tuannll/cicids-bruteforce-ids/actions)
 
-**[🚀 Quick Start](#-quick-start) • [📊 Kết quả Thực nghiệm](#-tóm-tắt-kết-quả-thực-nghiệm-benchmark) • [🛡️ Quy chuẩn Chống Leakage](#-quy-chuẩn-khoa-học--chống-data-leakage) • [❓ FAQ](#-faq) • [📖 Báo cáo Đồ án](docs/BAO_CAO_THUC_NGHIEM_W3_W4.md)**
+**[🚀 Quick Start](#quick-start) • [📊 Kết quả Thực nghiệm](#benchmark) • [🛡️ Quy chuẩn Chống Leakage](#protocol) • [❓ FAQ](#faq) • [📖 Báo cáo Đồ án](docs/BAO_CAO_THUC_NGHIEM_W3_W4.md)**
 
 **Tiếng Việt** | [English](README.en.md)
 
@@ -23,12 +23,14 @@
 
 ---
 
+<a id="about"></a>
 ## 📌 Giới thiệu & Tác dụng của Repository
 
 Trong nghiên cứu áp dụng Trí tuệ nhân tạo (AI/ML) vào Hệ thống Phát hiện Xâm nhập Mạng (NIDS), phần lớn các nghiên cứu học thuật đạt **F1-Score xấp xỉ 99.9%** trên tập dữ liệu chuẩn như **CICIDS2017**. Tuy nhiên, khi đưa vào môi trường mạng thực tế, các hệ thống này thường **thất bại hoàn toàn** trước các đợt tấn công mới.
 
 **Repository này chứng minh và định lượng nguyên nhân cốt lõi:**
-1. **Ảo tưởng đánh giá ngẫu nhiên (Optimistic Bias of Random Split)**: Việc xáo trộn ngẫu nhiên dữ liệu (`train_test_split`) xé nhỏ các flow trong cùng một chiến dịch tấn công sang cả hai tập Train và Test, dẫn đến rò rỉ dữ liệu (Data Leakage). Mô hình chỉ "ghi nhớ lại" mẫu thay vì học quy luật.
+
+1. **Ảo tưởng đánh giá ngẫu nhiên (Optimistic Bias of Random Split)**: Xáo trộn ngẫu nhiên dữ liệu (`train_test_split`) xé nhỏ các flow trong cùng một chiến dịch tấn công sang cả hai tập Train và Test, dẫn đến rò rỉ dữ liệu (Data Leakage). Mô hình chỉ "ghi nhớ lại" mẫu thay vì học quy luật.
 2. **Lối tắt cổng dịch vụ (Destination Port Shortcut)**: Mô hình học vẹt rằng `Port 21 = FTP Attack`, `Port 22 = SSH Attack`. Khi tấn công dịch chuyển sang cổng khác hoặc biến thể mới, mô hình sụp đổ (F1 rơi từ 99.9% về 0.0%).
 3. **Quy chuẩn thực nghiệm kiểm toán được (Auditable Protocol)**: Cung cấp framework chuẩn mực với cơ chế **Purge & Embargo window**, cô lập tiền xử lý (chỉ `fit` trên Train), và **Single-open Test Rule** (khóa Test, chỉ chấm điểm đúng một lần).
 
@@ -37,6 +39,7 @@ Trong nghiên cứu áp dụng Trí tuệ nhân tạo (AI/ML) vào Hệ thống 
 
 ---
 
+<a id="features"></a>
 ## ✨ Điểm nổi bật & So sánh Phương pháp
 
 | Tiêu chí | Tiếp cận Ngây thơ (Phổ biến) | Tiếp cận Chuẩn mực (Repo này) |
@@ -50,11 +53,13 @@ Trong nghiên cứu áp dụng Trí tuệ nhân tạo (AI/ML) vào Hệ thống 
 
 ---
 
+<a id="benchmark"></a>
 ## 📊 Tóm tắt Kết quả Thực nghiệm (Benchmark)
 
 Thực nghiệm đối chuẩn 3 họ mô hình cây: **Decision Tree (Baseline)**, **Random Forest (Bagging)**, và **XGBoost (Boosting)** trên tập dữ liệu **CICIDS2017 Tuesday** (FTP-Patator & SSH-Patator).
 
 ### 1. Kịch bản Thực tế theo Thời gian (Time-based Split) — Thách thức Zero-Shot
+
 > **Điều kiện**: Huấn luyện **duy nhất trên tập Train** (buổi sáng, 100% `FTP-Patator`). Đánh giá trên tập **Test** (buổi chiều, 100% `SSH-Patator`).
 
 | Mô hình | Không gian đặc trưng | Test Accuracy | Precision | Recall | F1-Score | SSH Recall | FTP Recall | Đánh giá hiện tượng |
@@ -67,6 +72,7 @@ Thực nghiệm đối chuẩn 3 họ mô hình cây: **Decision Tree (Baseline)
 | **XGBoost** | Without Port (66 feats)| 0.9740 | 0.2653 | 0.0035 | **0.0069** | 0.35% | N/A | Tương tự RF, tỷ lệ nhận diện biến thể mới thực tế dưới 1% |
 
 ### 2. Kịch bản Đối chứng Ngẫu nhiên (Random Split) — Độ lệch Lạc quan Giả tạo
+
 > **Điều kiện**: Xáo trộn ngẫu nhiên toàn bộ flow trong ngày Tuesday giữa Train, Validation và Test.
 
 | Mô hình | Không gian đặc trưng | Test Accuracy | Precision | Recall | F1-Score | SSH Recall | FTP Recall |
@@ -83,9 +89,13 @@ Thực nghiệm đối chuẩn 3 họ mô hình cây: **Decision Tree (Baseline)
 
 ---
 
+<a id="quick-start"></a>
 ## 🚀 Quick Start
 
 Repo đi kèm bộ sinh dữ liệu giả lập (Synthetic Data Generator) giúp người dùng **clone về và chạy kiểm thử toàn bộ pipeline trong 30 giây** mà không cần tải bộ dữ liệu raw 10 GB.
+
+> [!TIP]
+> Khuyến nghị dùng Python 3.11 hoặc 3.12 trong môi trường ảo `.venv` để tương thích tốt nhất với `scikit-learn` và `shap`.
 
 ### 1. Cài đặt Môi trường
 
@@ -133,10 +143,12 @@ ids predict --config demo_run/configs/demo.yaml --input demo_run/example_flow.js
 ```bash
 python scripts/generate_detailed_visualizations.py
 ```
+
 *Toàn bộ biểu đồ phân tích cấu trúc cây, đường cong PR/ROC, ma trận nhầm lẫn và SHAP sẽ được lưu tại `experiments/figures/`.*
 
 ---
 
+<a id="protocol"></a>
 ## 🛡️ Quy chuẩn Khoa học & Chống Data Leakage
 
 ```mermaid
@@ -165,40 +177,47 @@ flowchart TD
 
 ---
 
+<a id="faq"></a>
 ## ❓ FAQ
 
 <details>
 <summary><b>1. Tại sao điểm F1 trên tập Test theo thời gian lại bằng 0%, có phải mô hình bị lỗi?</b></summary>
 <br/>
+
 Không. Đây chính là phát hiện khoa học quan trọng nhất của đồ án. Tập Train diễn ra vào buổi sáng và chỉ có tấn công <code>FTP-Patator</code>, trong khi tập Test diễn ra vào buổi chiều và chỉ có <code>SSH-Patator</code>. Các mô hình cây khi thấy cổng dịch vụ đã phân nhánh dựa trên cổng (ví dụ: <code>Destination Port &lt;= 21.5</code>). Khi gặp tấn công SSH trên cổng 22, mô hình coi đây là lưu lượng bình thường (BENIGN). Ngay cả khi bỏ cổng (Port Ablation), hành vi thống kê gói tin của SSH khác biệt với FTP khiến việc phát hiện zero-shot bằng Supervised ML cổ điển thất bại.
 </details>
 
 <details>
 <summary><b>2. Tại sao Random Split lại đạt F1 lên tới 99.9%?</b></summary>
 <br/>
+
 Phép chia ngẫu nhiên vi phạm giả định độc lập thời gian (I.I.D) của dữ liệu chuỗi. Một đợt tấn công Brute Force gồm hàng chục nghìn flow liên tiếp có cùng địa chỉ IP, cổng và đặc tính gói tin tương đồng. Khi chia ngẫu nhiên, các flow của cùng một đợt tấn công bị xé lẻ vào cả Train và Test. Mô hình chỉ cần "nhớ lại" mẫu đã gặp là đạt điểm tuyệt đối.
 </details>
 
 <details>
 <summary><b>3. Bỏ Destination Port có giúp mô hình nhận diện được tấn công mới không?</b></summary>
 <br/>
+
 Không đáng kể. Kết quả thực nghiệm cho thấy khi bỏ cổng mạng, F1-Score chỉ tăng từ 0.0000 lên 0.0074 (Random Forest bắt được 14/3,732 flow SSH), nhưng đổi lại tạo ra 44 ca báo động giả (False Positive). Điều này chứng minh các đặc trưng thống kê luồng (flow duration, inter-arrival time) giữa FTP và SSH có sự khác biệt lớn, không thể tự động tổng quát hóa nếu không có kỹ thuật học chuyển giao (Transfer Learning) hoặc phát hiện dị biệt (Anomaly Detection).
 </details>
 
 <details>
 <summary><b>4. Tôi không có file CSV CICIDS2017 gốc (10GB) thì có chạy được repo không?</b></summary>
 <br/>
+
 Hoàn toàn được! Repo cung cấp script <code>scripts/smoke_test.py</code> và <code>scripts/make_demo_data.py</code> sinh dữ liệu giả lập có đầy đủ đặc trưng, nhãn thời gian và cấu trúc như dữ liệu thật. Bạn có thể kiểm chứng toàn bộ luồng huấn luyện, xuất artifact và vẽ biểu đồ chỉ trong vài giây.
 </details>
 
 <details>
 <summary><b>5. Hệ thống này có thể triển khai thành IDS thời gian thực (như Snort/Suricata) không?</b></summary>
 <br/>
+
 Mô hình hoạt động trên dữ liệu thống kê flow hoàn tất (completed network flows) được trích xuất từ công cụ như CICFlowMeter. Để đưa vào thực tế, cần kết hợp kiến trúc lai (Hybrid IDS): dùng Snort/Suricata bắt luật và rate-limiting nhanh ở tầng gói tin, kết hợp mô hình ML ở tầng sau để phân tích hành vi phiên và giảm cảnh báo giả.
 </details>
 
 ---
 
+<a id="tech-stack"></a>
 ## 🛠️ Công nghệ Sử dụng
 
 - **Ngôn ngữ**: Python 3.11 / 3.12
@@ -210,6 +229,7 @@ Mô hình hoạt động trên dữ liệu thống kê flow hoàn tất (complet
 
 ---
 
+<a id="structure"></a>
 ## 📂 Cấu trúc Thư mục
 
 ```text
@@ -228,7 +248,8 @@ cicids-bruteforce-ids/
 
 ---
 
-## 👥 Tác giả & Đóng góp (Authors & Contributors)
+<a id="authors"></a>
+## 👥 Tác giả & Đóng góp
 
 Dự án được nghiên cứu và phát triển bởi:
 
@@ -240,12 +261,14 @@ Dự án được nghiên cứu và phát triển bởi:
 
 ---
 
-## ⚠️ Tuyên bố Từ chối Trách nhiệm (Disclaimer)
+<a id="disclaimer"></a>
+## ⚠️ Tuyên bố Từ chối Trách nhiệm
 
 Dự án này được thực hiện phục vụ mục đích **nghiên cứu học thuật và giáo dục trong lĩnh vực An toàn Bảo mật Thông tin**. Mã nguồn và kết quả không nhằm mục đích phục vụ tấn công mạng hay thay thế hoàn toàn các giải pháp tường lửa/IDS thương mại trong môi trường sản xuất khi chưa qua thẩm định bảo mật.
 
 ---
 
-## 📄 Giấy phép (License)
+<a id="license"></a>
+## 📄 Giấy phép
 
-Dự án được phân phối dưới giấy phép **MIT License**. Xem chi tiết tại [LICENSE](LICENSE).
+Dự án được phân phối dưới giấy phép **MIT License**. Chi tiết xem tại [LICENSE](LICENSE).

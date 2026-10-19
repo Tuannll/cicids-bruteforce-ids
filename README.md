@@ -13,7 +13,7 @@
 
 **[🚀 Quick Start](#-quick-start) • [📊 Benchmark Results](#-benchmark-results) • [🛡️ Anti-Leakage Protocol](#-scientific-anti-leakage-protocol) • [❓ FAQ](#-faq) • [📖 Full Report](docs/BAO_CAO_THUC_NGHIEM_W3_W4.md)**
 
-[Tiếng Việt](README.md) | **English**
+[Tiếng Việt](README.vi.md) | **English**
 
 <br/>
 

@@ -13,7 +13,7 @@
 
 **[🚀 Quick Start](#quick-start) • [📊 Kết quả Thực nghiệm](#benchmark) • [🛡️ Quy chuẩn Chống Leakage](#protocol) • [❓ FAQ](#faq) • [📖 Báo cáo Đồ án](docs/BAO_CAO_THUC_NGHIEM_W3_W4.md)**
 
-**Tiếng Việt** | [English](README.en.md)
+**Tiếng Việt** | [English](README.md)
 
 <br/>
 

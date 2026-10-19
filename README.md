@@ -4,12 +4,12 @@
 
 **Empirical evaluation of temporal generalization and uncovering the optimistic evaluation bias (Data Leakage) of tree-based machine learning models in network intrusion detection.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
-[![Python: 3.11 | 3.12](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6%2B-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-3.0.5-006699?style=flat-square)](https://xgboost.readthedocs.io/)
-[![SHAP](https://img.shields.io/badge/XAI-SHAP%200.48-brightgreen?style=flat-square)](https://shap.readthedocs.io/)
-[![CI Status](https://img.shields.io/badge/CI-Passing-success?style=flat-square&logo=githubactions&logoColor=white)](.github/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python: 3.11 | 3.12](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6%2B-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-3.0.5-006699?logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io/)
+[![SHAP](https://img.shields.io/badge/XAI-SHAP%200.48-brightgreen)](https://shap.readthedocs.io/)
+[![CI Status](https://img.shields.io/badge/CI-Passing-success?logo=githubactions&logoColor=white)](https://github.com/Tuannll/cicids-bruteforce-ids/actions)
 
 **[🚀 Quick Start](#-quick-start) • [📊 Benchmark Results](#-benchmark-results) • [🛡️ Anti-Leakage Protocol](#-scientific-anti-leakage-protocol) • [❓ FAQ](#-faq) • [📖 Full Report](docs/BAO_CAO_THUC_NGHIEM_W3_W4.md)**
 
